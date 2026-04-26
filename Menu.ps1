@@ -115,14 +115,15 @@ do {
                         Set-Location "C:\temp"
                         Get-ChildItem -Path "C:\Temp\Dump" | Remove-Item -Recurse -Force | Out-Null
                         Get-ChildItem -Path "C:\Temp\Scripts" -File | Where-Object { $_.Name -ne "Menu.ps1" } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force } | Out-Null
-                        $urls = @(
-                            "$baseUrl/PCCheck.ps1",
-                            "$baseUrl/QuickMFT.ps1",
-                            "$baseUrl/Registry.ps1",
-                            "$baseUrl/SystemLogs.ps1",
-                            "$baseUrl/ProcDump.ps1",
-                            "$baseUrl/Localhost.ps1",
-                            "$baseUrl/Viewer.html"
+                      $urls = @(
+    "https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/main/PCCheck.ps1",
+    "https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/main/MFT.ps1",
+    "https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/main/Registry.ps1",
+    "https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/main/SystemLogs.ps1",
+    "https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/main/ProcDump.ps1",
+    "https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/main/Localhost.ps1",
+    "https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/main/Viewer.html"
+)
                         )
                         $destinationPath = "C:\Temp\Scripts"
                         foreach ($url in $urls) {
