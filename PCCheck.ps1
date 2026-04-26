@@ -14,7 +14,7 @@
 # 27 - November - 2024
 
 $ErrorActionPreference = "SilentlyContinue" 
-$configJson = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/dot-sys/cfg/master/cfg.json" 
+$configJson = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/main/cfg/cfg.json"
 $Astra = $configJson.Astra
 $FilesizeH = $configJson.FilesizeH
 $FilesizeL = $configJson.FilesizeL
