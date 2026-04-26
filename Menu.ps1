@@ -14,7 +14,7 @@
 # 05 - November - 2024
 
 $ErrorActionPreference = "SilentlyContinue"
-$baseUrl = "https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/main"
+$baseUrl = :"https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/refs/heads/main/Menu.ps1"
 
 function Show-MainMenu {
     return Read-Host "`n`n`nChoose a Category:`n
