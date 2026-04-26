@@ -746,6 +746,30 @@ if ($eventResults2.Count -ne 0) {
 }
 
 $Cheats7 = $HashMatchings
+# --- ALERT: Shadow Defender / 420-0 Service Detection ---
+$alertItems = @()
+
+$sdService = Get-Service -Name "ShadowDefendService" -ErrorAction SilentlyContinue
+if ($sdService) {
+    $alertItems += "Shadow Defender SERVICE detected (Status: $($sdService.Status))"
+}
+
+$420Service = Get-Service -ErrorAction SilentlyContinue | Where-Object { $_.Name -match "420" -or $_.DisplayName -match "420" }
+foreach ($svc in $420Service) {
+    $alertItems += "420-0 Service detected: $($svc.Name) (Status: $($svc.Status))"
+}
+
+$alertHashes = $hashFilePaths | Where-Object { $_ -match "ShadowDefender|XenoLauncher|TZX|420-0" }
+foreach ($ah in $alertHashes) { $alertItems += $ah }
+
+$ALERT = ""
+if ($alertItems.Count -gt 0) {
+    $ALERT  = "`n========================================`n"
+    $ALERT += "                  !! ALERT !!`n"
+    $ALERT += "========================================`n"
+    $ALERT += ($alertItems | ForEach-Object { "`t!! $_ !!" }) -join "`n"
+    $ALERT += "`n========================================`n"
+}
 
 if ($Cheats1 -or $Cheats2 -or $Cheats3 -or $Cheats4 -or $Cheats5 -or $Cheats6 -or $Cheats7) { $Cheatsheader = $h7 }
 
