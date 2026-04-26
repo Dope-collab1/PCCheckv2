@@ -13,7 +13,9 @@
 # Version 2.0
 # 05 - November - 2024
 
-$ErrorActionPreference = "SilentlyContinue" 
+$ErrorActionPreference = "SilentlyContinue"
+$baseUrl = "https://raw.githubusercontent.com/Dope-collab1/PCCheckv2/main"
+
 function Show-MainMenu {
     return Read-Host "`n`n`nChoose a Category:`n
     (1)`t`tChecks`n
@@ -50,7 +52,7 @@ function CleanTraces {
     Get-ChildItem -Path "C:\Temp\Dump" | Remove-Item -Recurse -Force | Out-Null
     Get-ChildItem -Path "C:\Temp\Scripts" -File | Where-Object { $_.Name -ne "Menu.ps1" } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force } | Out-Null
     Write-Host "Traces cleaned successfully." -ForegroundColor green
-    Write-Host "`n`n`tReturning to Menu in " -NoNewline 
+    Write-Host "`n`n`tReturning to Menu in " -NoNewline
     Write-Host "2 " -NoNewLine -ForegroundColor Magenta
     Write-Host "Seconds`n`n`n" -NoNewline
     Start-Sleep 2
@@ -75,20 +77,20 @@ do {
                 $checksChoice = Show-ChecksMenu
                 switch ($checksChoice) {
                     1 {
-                        Write-Host "`n`nPerforming Check..." -ForegroundColor yellow
+                        Write-Host "`n`nPerforming Full Check..." -ForegroundColor yellow
                         New-Item -Path "C:\Temp\Scripts" -ItemType Directory -Force | Out-Null
                         New-Item -Path "C:\Temp\Dump" -ItemType Directory -Force | Out-Null
                         Set-Location "C:\temp"
                         Get-ChildItem -Path "C:\Temp\Dump" | Remove-Item -Recurse -Force | Out-Null
                         Get-ChildItem -Path "C:\Temp\Scripts" -File | Where-Object { $_.Name -ne "Menu.ps1" } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force } | Out-Null
                         $urls = @(
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/PCCheck.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/MFT.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/Registry.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/SystemLogs.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/ProcDump.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/Localhost.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/Viewer.html"
+                            "$baseUrl/PCCheck.ps1",
+                            "$baseUrl/MFT.ps1",
+                            "$baseUrl/Registry.ps1",
+                            "$baseUrl/SystemLogs.ps1",
+                            "$baseUrl/ProcDump.ps1",
+                            "$baseUrl/Localhost.ps1",
+                            "$baseUrl/Viewer.html"
                         )
                         $destinationPath = "C:\Temp\Scripts"
                         foreach ($url in $urls) {
@@ -114,13 +116,13 @@ do {
                         Get-ChildItem -Path "C:\Temp\Dump" | Remove-Item -Recurse -Force | Out-Null
                         Get-ChildItem -Path "C:\Temp\Scripts" -File | Where-Object { $_.Name -ne "Menu.ps1" } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force } | Out-Null
                         $urls = @(
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/PCCheck.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/QuickMFT.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/Registry.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/SystemLogs.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/ProcDump.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/Localhost.ps1",
-                            "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/Viewer.html"
+                            "$baseUrl/PCCheck.ps1",
+                            "$baseUrl/QuickMFT.ps1",
+                            "$baseUrl/Registry.ps1",
+                            "$baseUrl/SystemLogs.ps1",
+                            "$baseUrl/ProcDump.ps1",
+                            "$baseUrl/Localhost.ps1",
+                            "$baseUrl/Viewer.html"
                         )
                         $destinationPath = "C:\Temp\Scripts"
                         foreach ($url in $urls) {
@@ -156,7 +158,7 @@ do {
                         Write-Host "`n`nPerforming Advanced Filechecking (BETA)..." -ForegroundColor yellow
                         New-Item -Path "C:\Temp\Scripts" -ItemType Directory -Force | Out-Null
                         Set-Location "C:\temp"
-                        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/dot-sys/PCCheckv2/master/Packers.ps1" -OutFile "C:\Temp\Scripts\Packers.ps1"
+                        Invoke-WebRequest -Uri "$baseUrl/Packers.ps1" -OutFile "C:\Temp\Scripts\Packers.ps1"
                         Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
                         & C:\Temp\Scripts\Packers.ps1
                         return
@@ -225,7 +227,7 @@ do {
                         Write-Host "`n`nInvalid option selected. Returning to Programs Menu." -ForegroundColor red
                         Start-Sleep 3
                     }
-                }                
+                }
             } while ($programsChoice -ne 0)
         }
         "clean" {
